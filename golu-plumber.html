@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golu Plumber — Korba's Most Trusted Plumbing Expert</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #1a3f6f;
+    --blue-mid: #2563a8;
+    --blue-light: #e8f1fb;
+    --gold: #c8831a;
+    --gold-light: #faeeda;
+    --white: #ffffff;
+    --off: #f7f5f0;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --border: #e2ddd5;
+    --pipe: #d1d9e0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(6px);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 900;
+    color: var(--blue);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--gold); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    text-decoration: none; font-size: 0.9rem; font-weight: 400;
+    color: var(--muted); letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--blue); }
+  .nav-cta {
+    background: var(--blue); color: var(--white) !important;
+    padding: 0.5rem 1.2rem; border-radius: 4px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--blue-mid) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 5% 4rem;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 50%; height: 100%;
+    background: var(--blue-light);
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .hero-text { position: relative; z-index: 2; padding-right: 3rem; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--gold-light);
+    color: var(--gold);
+    font-size: 0.78rem; font-weight: 500;
+    padding: 0.3rem 0.9rem; border-radius: 2px;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--blue);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero p {
+    font-size: 1.05rem; color: var(--muted);
+    line-height: 1.75; max-width: 460px;
+    margin-bottom: 2rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue); color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--blue-mid); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--blue); color: var(--blue);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { background: var(--blue); color: var(--white); }
+
+  /* hero visual */
+  .hero-visual {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 2rem 2.2rem;
+    box-shadow: 0 12px 48px rgba(26,63,111,0.12);
+    max-width: 360px; width: 100%;
+  }
+  .hero-card .rating-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem; font-weight: 900; color: var(--blue);
+    line-height: 1;
+  }
+  .stars { color: var(--gold); font-size: 1.3rem; letter-spacing: 2px; }
+  .hero-card .rev-count {
+    font-size: 0.85rem; color: var(--muted); margin-top: 4px;
+  }
+  .hero-divider { height: 1px; background: var(--border); margin: 1.2rem 0; }
+  .hero-chips { display: flex; flex-direction: column; gap: 0.7rem; }
+  .hero-chip {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.88rem; color: var(--muted);
+  }
+  .chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+  }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background: var(--blue);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    text-align: center; padding: 2.5rem 5%;
+  }
+  .stat-item { padding: 0.5rem 1rem; border-right: 1px solid rgba(255,255,255,0.1); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--white);
+  }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-top: 4px; letter-spacing: 0.5px; }
+
+  /* ── SERVICES ── */
+  .section { padding: 6rem 5%; }
+  .section-tag {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+    color: var(--gold); font-weight: 500; margin-bottom: 0.7rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700; color: var(--blue); line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+  .section-sub { font-size: 1rem; color: var(--muted); max-width: 520px; line-height: 1.7; }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5px; margin-top: 3rem;
+    border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
+  }
+  .service-card {
+    background: var(--white);
+    padding: 2rem 1.8rem;
+    border-right: 1.5px solid var(--border);
+    border-bottom: 1.5px solid var(--border);
+    transition: background 0.25s, transform 0.2s;
+    cursor: default;
+  }
+  .service-card:hover { background: var(--blue-light); }
+  .service-icon {
+    width: 48px; height: 48px; border-radius: 6px;
+    background: var(--blue); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+  .service-icon svg { fill: white; width: 24px; height: 24px; }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+  .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── REVIEWS ── */
+  .reviews-section { background: var(--off); padding: 6rem 5%; }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.2rem; margin-top: 3rem;
+  }
+  .review-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.6rem 1.8rem;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s;
+    position: relative;
+  }
+  .review-card:hover { box-shadow: 0 8px 32px rgba(26,63,111,0.08); }
+  .review-card.featured {
+    border-color: var(--blue);
+    border-width: 1.5px;
+  }
+  .review-card.featured::before {
+    content: 'Recent';
+    position: absolute; top: -10px; left: 1.4rem;
+    background: var(--blue); color: var(--white);
+    font-size: 0.7rem; padding: 2px 8px; border-radius: 3px;
+    font-weight: 500; letter-spacing: 0.5px;
+  }
+  .reviewer-meta {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 0.9rem;
+  }
+  .reviewer-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--blue); display: flex; align-items: center; justify-content: center;
+    color: var(--white); font-size: 0.85rem; font-weight: 600; flex-shrink: 0;
+  }
+  .reviewer-name { font-weight: 500; font-size: 0.92rem; color: var(--text); }
+  .reviewer-date { font-size: 0.78rem; color: var(--muted); }
+  .review-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 0.7rem; }
+  .review-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .review-owner-reply {
+    margin-top: 1rem; padding: 0.8rem 1rem;
+    background: var(--blue-light); border-radius: 4px;
+    border-left: 3px solid var(--blue);
+  }
+  .reply-label { font-size: 0.72rem; color: var(--blue); font-weight: 500; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .reply-text { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── WHY US ── */
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center; margin-top: 0;
+  }
+  .why-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .why-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .why-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900; color: var(--border);
+    line-height: 1; min-width: 40px;
+  }
+  .why-item h4 { font-weight: 500; font-size: 0.98rem; color: var(--text); margin-bottom: 3px; }
+  .why-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+  .why-visual {
+    background: var(--blue);
+    border-radius: 8px; padding: 2.5rem;
+    color: var(--white);
+  }
+  .why-visual-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;
+  }
+  .specialty-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .tag {
+    background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9);
+    padding: 0.35rem 0.8rem; border-radius: 3px;
+    font-size: 0.8rem;
+  }
+  .tag-gold { background: var(--gold); color: var(--white); }
+  .why-brands { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.15); }
+  .brand-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .brand-list { font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 2; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--blue);
+    padding: 6rem 5%;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 900;
+    color: var(--white); margin-bottom: 1rem;
+  }
+  .cta-section p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 480px; margin: 0 auto 2rem; line-height: 1.75; }
+  .cta-phone {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; font-weight: 700; color: var(--gold);
+    display: block; margin-bottom: 1.5rem; text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .cta-phone:hover { opacity: 0.85; }
+  .cta-note { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-top: 1.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0f1e35;
+    padding: 3rem 5% 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer .logo { color: var(--white); }
+  .footer-text { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .footer-loc { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+
+  /* ── PIPE DECORATION ── */
+  .pipe-dec {
+    display: flex; align-items: center; gap: 0; margin: 2rem 0;
+  }
+  .pipe-seg { height: 4px; background: var(--pipe); border-radius: 2px; }
+  .pipe-joint { width: 14px; height: 14px; border-radius: 50%; background: var(--border); margin: 0 -2px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding-top: 7rem; }
+    .hero::before { display: none; }
+    .hero-text { padding-right: 0; }
+    .hero-visual { margin-top: 2.5rem; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .why-grid { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+  }
+
+  /* Scroll animations */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Golu <span>Plumber</span></div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#about">Why Us</a></li>
+    <li><a href="#contact" class="nav-cta">Call Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">⭐ Korba's #1 Rated Plumber</div>
+    <h1>Expert Plumbing<br>for <em>New Homes</em><br>&amp; Repairs</h1>
+    <p>From complete new-house plumbing installations to Jaquar fittings, bathroom setups, and quick repairs — Golu Plumber delivers top-class finishing every time.</p>
+    <div class="hero-btns">
+      <a href="tel:8815670136" class="btn-primary">📞 Call 8815670136</a>
+      <a href="#reviews" class="btn-outline">Read Reviews</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="rating-big">5.0</div>
+      <div class="stars">★★★★★</div>
+      <div class="rev-count">Based on 8+ Google Reviews</div>
+      <div class="hero-divider"></div>
+      <div class="hero-chips">
+        <div class="hero-chip"><div class="chip-dot"></div>Complete new house plumbing</div>
+        <div class="hero-chip"><div class="chip-dot"></div>Jaquar & modern fittings</div>
+        <div class="hero-chip"><div class="chip-dot"></div>Zero leakage guarantee</div>
+        <div class="hero-chip"><div class="chip-dot"></div>Systematic, professional work</div>
+        <div class="hero-chip"><div class="chip-dot"></div>Serving Korba &amp; surrounding areas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">5★</div>
+    <div class="stat-label">Google Rating</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Satisfied Customers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Leakage Complaints</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">📞</div>
+    <div class="stat-label">8815670136</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="reveal">
+    <div class="section-tag">What We Do</div>
+    <div class="section-title">Complete Plumbing Solutions</div>
+    <p class="section-sub">From the first pipe to the final fitting — we handle every aspect of your plumbing with precision and care.</p>
+  </div>
+
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/><rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="white" stroke-width="2"/></svg>
+      </div>
+      <h3>New House Plumbing</h3>
+      <p>Complete plumbing from scratch — systematic pipe laying, fitting installation, and perfect finishing for your new home.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="white"/></svg>
+      </div>
+      <h3>Bathroom Setup</h3>
+      <p>Modern bathroom installations including shower systems, Jaquar fittings, and sleek fixtures with top-class finishing.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="white" stroke-width="2"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" fill="none"/></svg>
+      </div>
+      <h3>Pipe Fitting &amp; Repair</h3>
+      <p>Quick, accurate pipe fitting and repair work. No leakage, no loose connections — done right the first time.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" fill="none" stroke="white" stroke-width="2"/></svg>
+      </div>
+      <h3>Home Water Solutions</h3>
+      <p>Complete home water applicant solutions — from tanks to taps, we design and install your entire water supply system.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" stroke-width="2"/></svg>
+      </div>
+      <h3>Jaquar Brand Fittings</h3>
+      <p>Authorised installation of premium Jaquar fittings — taps, showers, and bathroom accessories fitted to spec.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" fill="none" stroke="white" stroke-width="2"/></svg>
+      </div>
+      <h3>Plumbing Consultation</h3>
+      <p>Expert advice on your plumbing layout, material selection, and best approach for renovation or new construction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="reveal">
+    <div class="section-tag">Google Reviews</div>
+    <div class="section-title">What Our Customers Say</div>
+    <p class="section-sub">Real reviews from real customers in Korba and surrounding areas.</p>
+  </div>
+
+  <div class="reviews-grid">
+
+    <div class="review-card featured reveal">
+      <div class="reviewer-meta">
+        <div class="reviewer-avatar" style="background:#1a3f6f;">SJ</div>
+        <div>
+          <div class="reviewer-name">Sameer Jagat</div>
+          <div class="reviewer-date">2 days ago · New</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Got my complete new home plumbing done by Golu Plumber. Very precise fitting, zero leakage, and top-class finishing. Bathroom setup is beautifully modern. Highly recommended for new house plumbing — call-worthy service!</div>
+      <div class="review-owner-reply">
+        <div class="reply-label">Golu Plumber (Owner)</div>
+        <div class="reply-text">Thank you sir for your kind review ♥️</div>
+      </div>
+    </div>
+
+    <div class="review-card featured reveal">
+      <div class="reviewer-meta">
+        <div class="reviewer-avatar" style="background:#2563a8;">SK</div>
+        <div>
+          <div class="reviewer-name">Sakun Jaiswal</div>
+          <div class="reviewer-date">2 days ago · New</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Golu Plumber handled the complete plumbing for my new house — absolutely perfect finishing. Jaquar fittings and bathroom setup all installed professionally and on time.</div>
+      <div class="review-owner-reply">
+        <div class="reply-label">Golu Plumber (Owner)</div>
+        <div class="reply-text">Thank you</div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="reviewer-meta">
+        <div class="reviewer-avatar" style="background:#534AB7;">SR</div>
+        <div>
+          <div class="reviewer-name">SURAlJ Raja</div>
+          <div class="reviewer-date">2 weeks ago · New</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">They handled our entire new home plumbing from start to finish — very systematic and professional. Pipe fitting, bathroom setup, all done with perfect planning. Highly recommend for full plumbing work!</div>
+      <div class="review-owner-reply">
+        <div class="reply-label">Golu Plumber (Owner)</div>
+        <div class="reply-text">Bahut bahut dhanyawaad sir 🙏 New house plumbing, bathroom fitting, repair — sab kaam best quality ke saath. Call karein: 8815670136</div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="reviewer-meta">
+        <div class="reviewer-avatar" style="background:#c8831a;">KS</div>
+        <div>
+          <div class="reviewer-name">Kalpana Singh</div>
+          <div class="reviewer-date">3 weeks ago</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Good plumber and perfect experience.</div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="reviewer-meta">
+        <div class="reviewer-avatar" style="background:#0f6e56;">LS</div>
+        <div>
+          <div class="reviewer-name">Lakky Sarthi</div>
+          <div class="reviewer-date">1 year ago</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Best plumbing service in Korba. Had heard their name a lot — and the work is also excellent 👌</div>
+      <div class="review-owner-reply">
+        <div class="reply-label">Golu Plumber (Owner)</div>
+        <div class="reply-text">Thank you</div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="reviewer-meta">
+        <div class="reviewer-avatar" style="background:#a32d2d;">BR</div>
+        <div>
+          <div class="reviewer-name">Badsha Raja</div>
+          <div class="reviewer-date">9 months ago</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Excellent work! Suggested a complete home water applicant solution and delivered perfectly.</div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="reviewer-meta">
+        <div class="reviewer-avatar" style="background:#185FA5;">BP</div>
+        <div>
+          <div class="reviewer-name">Bitu Patel</div>
+          <div class="reviewer-date">7 months ago</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Excellent work done — absolutely delighted with the results! ❤️</div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="reviewer-meta">
+        <div class="reviewer-avatar" style="background:#3B6D11;">PP</div>
+        <div>
+          <div class="reviewer-name">Praful Patel</div>
+          <div class="reviewer-date">1 year ago</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">The plumber is very skilled and provides the best services. Highly professional work.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section" id="about">
+  <div class="why-grid">
+    <div class="reveal">
+      <div class="section-tag">Why Choose Us</div>
+      <div class="section-title">Korba's Most Trusted Plumbing Expert</div>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-num">01</div>
+          <div>
+            <h4>Perfect Finishing, Zero Leakage</h4>
+            <p>Every customer confirms: no leakage, no loose fittings. We get it right the first time.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">02</div>
+          <div>
+            <h4>Systematic & Professional</h4>
+            <p>From planning to execution, we work methodically so your plumbing system lasts for decades.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">03</div>
+          <div>
+            <h4>On Time, Every Time</h4>
+            <p>Customers trust us to show up and complete work on schedule, without delays or excuses.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">04</div>
+          <div>
+            <h4>Highly Recommended in Korba</h4>
+            <p>Word of mouth is our strongest advertising — customers send friends and family to us.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual reveal">
+      <div class="why-visual-title">Our Specialisations</div>
+      <div class="specialty-tags">
+        <span class="tag tag-gold">New House Plumbing</span>
+        <span class="tag">Bathroom Setup</span>
+        <span class="tag">Jaquar Fittings</span>
+        <span class="tag">Pipe Fitting</span>
+        <span class="tag">Shower Systems</span>
+        <span class="tag">Water Supply Design</span>
+        <span class="tag">Leak Repairs</span>
+        <span class="tag">Home Renovation</span>
+        <span class="tag">Tap Installation</span>
+      </div>
+      <div class="why-brands">
+        <div class="brand-label">Brands We Work With</div>
+        <div class="brand-list">Jaquar &nbsp;·&nbsp; CERA &nbsp;·&nbsp; Hindware &nbsp;·&nbsp; Parryware</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="reveal">
+    <h2>Ready to Start Your<br>Plumbing Project?</h2>
+    <p>Call us today for a free consultation. Whether it's a new home or a repair, we're ready to help.</p>
+    <a href="tel:8815670136" class="cta-phone">8815670136</a>
+    <a href="tel:8815670136" class="btn-primary" style="font-size:1rem; padding:1rem 2.5rem;">Call Golu Plumber Now</a>
+    <div class="cta-note">Serving Korba and surrounding areas · Available 7 days a week</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Golu <span>Plumber</span></div>
+  <div class="footer-loc">📍 Korba, Chhattisgarh</div>
+  <div class="footer-text">© 2025 Golu Plumber · All rights reserved</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
